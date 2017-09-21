@@ -41,9 +41,6 @@ class DNode(object):
     def __gt__(self, other):
         return len(other.dependencies) > len(self.dependencies)
 
-    def __eq__(self, other):
-        return len(other.dependencies) == len(self.dependencies)
-
     def __repr__(self):
         return '{} ({}): {}'.format(self.key, len(self.dependencies), self.value)
 
@@ -80,7 +77,7 @@ class DSolver(object):
         if self.unregistered_nodes:
             raise UnregisteredDependencyError(next(iter(self.unregistered_nodes)))
 
-        nodes = self.__node_map.values()
+        nodes = list(self.__node_map.values())
 
         while nodes:
             nodes.sort()
