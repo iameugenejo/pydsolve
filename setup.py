@@ -11,5 +11,5 @@ setup(
     author='Eugene Jo',
     author_email='iameugenejo@gmail.com',
     url='https://github.com/iameugenejo/pydsolve',
-    keywords = 'dependency resolve'
+    keywords='dependency resolve'
 )
