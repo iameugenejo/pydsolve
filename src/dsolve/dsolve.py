@@ -85,12 +85,11 @@ class DSolver(object):
             if node.dependencies:
                 raise CircularDependencyError(node.key)
 
-            # resolve
-            func(node)
-
-            # then remove from dependencies
+            # resolve for dependent and remove from dependencies
             while self.dependents[node]:
-                self.dependents[node].pop().dependencies.remove(node)
+                dependent = self.dependents[node].pop()
+                func(node.value, dependent.value)
+                dependent.dependencies.remove(node)
 
     def clear(self):
         self.__node_map.clear()

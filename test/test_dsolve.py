@@ -87,9 +87,8 @@ class DSolveTest(unittest.TestCase):
             def resolve(self, key):
                 self.dependencies[key] = key
 
-        def resolve(n):
-            for d in self.resolver.dependents[n]:
-                d.value.resolve(n.key)
+        def resolve(n, d):
+            d.resolve(n.key)
 
         test = Node('a', {'b': '__PLACEHOLDER__'})
         self.resolver.register('a', test, ['b'])
