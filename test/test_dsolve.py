@@ -4,7 +4,7 @@ import dsolve
 
 class DSolveTest(unittest.TestCase):
     def setUp(self):
-        self.__resolver = dsolve.DSolver()
+        self.__resolver = dsolve.resolver()
 
     def void(self, *args, **kwargs):
         pass
