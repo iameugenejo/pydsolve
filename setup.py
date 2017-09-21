@@ -1,13 +1,15 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='dsolve',
+    packages=['dsolve'],
     package_dir={'': 'src'},
-    version='1.0.0',
+    version='1.0.1',
+    license='MIT',
     platforms='any',
     description='Generic Dependency Resolver',
     author='Eugene Jo',
     author_email='iameugenejo@gmail.com',
     url='https://github.com/iameugenejo/pydsolve',
-    install_requires=open('requirements.txt').readlines()
+    keywords = 'dependency resolve'
 )
