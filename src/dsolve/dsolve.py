@@ -94,4 +94,5 @@ class DSolver(object):
 
     def clear(self):
         self.__node_map.clear()
-
+        self.dependents.clear()
+        self.unregistered_nodes.clear()
