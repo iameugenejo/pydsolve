@@ -1,0 +1,2 @@
+# pydsolve
+Generic Dependency Resolver
