@@ -1,0 +1,13 @@
+#!/bin/bash
+
+mkdir -p dist/ &&
+rm -rf dist/* &&
+python setup.py sdist &&
+python setup.py bdist_wheel --universal &&
+read -p "Distribute? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    twine upload dist/*
+fi
+
