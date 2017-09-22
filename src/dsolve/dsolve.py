@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 
-class DependencyError(BaseException):
+class DependencyError(Exception):
     def __init__(self, key, *args, **kwargs):
         self.key = key
         super(DependencyError, self).__init__(key)
