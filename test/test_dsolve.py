@@ -27,6 +27,12 @@ class DSolveTest(unittest.TestCase):
         self.assertEqual('A', ctx.exception.old)
         self.assertEqual('B', ctx.exception.new)
 
+    def test_duplicate_duplicate_dependencies(self):
+        self.resolver.register('a', 'A', ['b', 'b'])
+        self.resolver.register('b', 'B')
+
+        self.resolver.resolve(self.void)
+
     def test_circular_dependency(self):
         self.resolver.register('a', 'A', ['b'])
         self.resolver.register('b', 'B', ['a'])

@@ -56,7 +56,8 @@ class DSolver(object):
         if node:
             if node.value is DNull:
                 node.value = obj
-                self.unregistered_nodes.remove(key)
+                if key in self.unregistered_nodes:
+                    self.unregistered_nodes.remove(key)
             elif node.value != obj:
                 raise DuplicateKeyError(key, node.value, obj)
         else:
@@ -89,7 +90,8 @@ class DSolver(object):
             while self.dependents[node]:
                 dependent = self.dependents[node].pop()
                 func(node.value, dependent.value)
-                dependent.dependencies.remove(node)
+                if node in dependent.dependencies:
+                    dependent.dependencies.remove(node)
 
     def clear(self):
         self.__node_map.clear()

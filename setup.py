@@ -4,7 +4,7 @@ setup(
     name='dsolve',
     packages=['dsolve'],
     package_dir={'': 'src'},
-    version='1.1.0',
+    version='1.1.1',
     license='MIT',
     platforms='any',
     description='Generic Dependency Resolver',
