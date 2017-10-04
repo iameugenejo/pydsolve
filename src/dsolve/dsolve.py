@@ -49,15 +49,19 @@ class DSolver(object):
     def __init__(self):
         self.__node_map = {}
         self.dependents = defaultdict(list)
-        self.unregistered_nodes = set()
+        self.__unregistered_nodes = set()
+
+    @property
+    def unregistered_nodes(self):
+        return set(self.__unregistered_nodes)
 
     def register(self, key, obj, dependencies=None):
         node = self.__node_map.get(key)
         if node:
             if node.value is DNull:
                 node.value = obj
-                if key in self.unregistered_nodes:
-                    self.unregistered_nodes.remove(key)
+                if key in self.__unregistered_nodes:
+                    self.__unregistered_nodes.remove(key)
             elif node.value != obj:
                 raise DuplicateKeyError(key, node.value, obj)
         else:
@@ -69,14 +73,14 @@ class DSolver(object):
 
                 if not dependency:
                     dependency = self.__node_map[dependent_key] = DNode(dependent_key)
-                    self.unregistered_nodes.add(dependent_key)
+                    self.__unregistered_nodes.add(dependent_key)
 
                 node.dependencies.add(dependency)
                 self.dependents[dependency].append(node)
 
     def resolve(self, func):
-        if self.unregistered_nodes:
-            raise UnregisteredDependencyError(next(iter(self.unregistered_nodes)))
+        if self.__unregistered_nodes:
+            raise UnregisteredDependencyError(next(iter(self.__unregistered_nodes)))
 
         nodes = list(self.__node_map.values())
 
@@ -96,4 +100,4 @@ class DSolver(object):
     def clear(self):
         self.__node_map.clear()
         self.dependents.clear()
-        self.unregistered_nodes.clear()
+        self.__unregistered_nodes.clear()
